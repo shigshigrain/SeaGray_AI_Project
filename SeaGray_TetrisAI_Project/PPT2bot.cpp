@@ -23,6 +23,8 @@ namespace shig {
 		botSpeed = 100;
 		selectCharacter = 0;
 		//controller;
+		GraySea = std::make_unique<shig::AiShigune>(1);
+		GraySea->load_ttrp();
 	}
 
 	PPT2bot::~PPT2bot()
@@ -150,18 +152,36 @@ namespace shig {
 					{
 					case PPT2Sync::Event::StartOperation:
 					{
+						// PPT2側Reader;
 						int field[10][40];
 						PPT2Sync::PPT2MemoryReader::GetField(field);
 						PPT2Sync::PPT2MemoryReader::Current current = PPT2Sync::PPT2MemoryReader::GetCurrentPiece();
 						PPT2Sync::AdjustCurrent(field, current);
 						PPT2Sync::PPT2MemoryReader::ComboB2B nowCB2B = PPT2Sync::PPT2MemoryReader::GetComboB2B();
+						
+						// Ai側Reader;
+						GraySea->ReadCurrent(current.type);
+						GraySea->ReadHold(PPT2Sync::PPT2MemoryReader::GetHold());
+						GraySea->ReadCB2B(nowCB2B.combo, nowCB2B.b2b);
+						for (int j = 0; j < 10; j++) {
+							for (int i = 0; i < 40; i++) {
+								GraySea->ReadField(i, j, field[j][i]);
+							}
+						}
 
-						PPT2Sync::Button b = PPT2Sync::StartOperation(OPERATION[operationIndex], OPERATION_LENGTH);
+						// Ai側Thinking;
+
+						GraySea->thinking();
+						std::unique_ptr<PPT2Sync::Command[]> nowOperate;
+						int opr_size = TranscribeCommand(nowOperate, GraySea->getCmdList());
+
+						PPT2Sync::Button b = PPT2Sync::StartOperation(nowOperate.get(), opr_size);
 						++operationIndex;
-						if (operationIndex >= OPERATION_KIND)
+						
+						/*if (operationIndex >= OPERATION_KIND)
 						{
 							operationIndex = 0;
-						}
+						}*/
 
 						controller.PressButton(b);
 					}
@@ -204,6 +224,44 @@ namespace shig {
 		}
 
 		return true;
+	}
+
+	int PPT2bot::TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int>& cmdl)
+	{
+		const size_t cmd_size = cmdl.size();
+		opr = make_unique<PPT2Sync::Command[]>(cmd_size);
+
+		for (size_t i = 0; i < cmd_size; i++) {
+
+			switch (cmdl.at(i))
+			{
+			case 1:
+				opr[i] = PPT2Sync::Command::Hold;
+				break;
+			case 2:
+				opr[i] = PPT2Sync::Command::Soft;
+				break;
+			case 3:
+				opr[i] = PPT2Sync::Command::Hard;
+				break;
+			case 4:
+				opr[i] = PPT2Sync::Command::Counterclockwise;
+				break;
+			case 5:
+				opr[i] = PPT2Sync::Command::Clockwise;
+				break;
+			case 6:
+				opr[i] = PPT2Sync::Command::Left;
+				break;
+			case 7:
+				opr[i] = PPT2Sync::Command::Right;
+				break;
+			default:
+				opr[i] = PPT2Sync::Command::None;
+				break;
+			}
+		}
+		return (int)cmd_size;
 	}
 
 	bool PPT2bot::Stop()

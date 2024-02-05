@@ -4,7 +4,7 @@
 
 #include "Controller.h"
 #include "PPT2Sync.h"
-
+#include "shigune_AI.h"
 
 namespace shig {
 
@@ -20,7 +20,7 @@ namespace shig {
 		int botSpeed;
 		int selectCharacter;
 		Controller controller;
-
+		std::unique_ptr<shig::AiShigune> GraySea;
 
 	public:
 		PPT2bot();
@@ -38,6 +38,7 @@ namespace shig {
 		bool Initialize();
 		bool Running();
 		bool Running(const std::atomic_bool& abort, std::atomic_int& index);
+		int TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int>& cmdl);
 		bool Stop();
 		bool Stop(std::atomic_bool& abort);
 		void Destroy();
