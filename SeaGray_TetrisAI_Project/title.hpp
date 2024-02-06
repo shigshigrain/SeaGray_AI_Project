@@ -17,21 +17,13 @@ public:
 private:
 
 	std::atomic_bool StartFlag;
-
 	double InputSpeed;
-
-	/*Rect m_soloB;
-	Transition m_soloT;
-
-	Rect m_aiB;
-	Transition m_aiT;
-
-	Rect m_setB;
-	Transition m_setT;*/
 
 	Rect m_exitB;
 	Transition m_exitT;
 
 	Texture bg_tex;
+
+
 
 };
