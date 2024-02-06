@@ -17,6 +17,8 @@ enum class State
 	Setting,
 };
 
+
+
 // 共有するデータ
 struct GameData
 {
@@ -32,6 +34,8 @@ constexpr uint64 refrashRate15 = 1000 / 15;
 constexpr uint64 refrashRate30 = 1000 / 30;
 constexpr uint64 refrashRate60 = 1000 / 60;
 constexpr uint64 refrashRate120 = 1000 / 120;
+
+
 
 static const std::vector<Color> minoC{
 	Color(255, 255, 255), // px=0
@@ -55,7 +59,7 @@ static const std::vector<Color> minoC{
 
 constexpr int minotex_path_size = 16;
 
-const vector<StringView> minotex_path = {
+const std::vector<StringView> minotex_path = {
 	U"tex\\mino\\flame_L.bmp",
 	U"tex\\mino\\I-mino_100.bmp",
 	U"tex\\mino\\J-mino_100.bmp",
