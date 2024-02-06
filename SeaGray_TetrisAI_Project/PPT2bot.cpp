@@ -158,22 +158,22 @@ namespace shig {
 						PPT2Sync::PPT2MemoryReader::Current current = PPT2Sync::PPT2MemoryReader::GetCurrentPiece();
 						PPT2Sync::AdjustCurrent(field, current);
 						PPT2Sync::PPT2MemoryReader::ComboB2B nowCB2B = PPT2Sync::PPT2MemoryReader::GetComboB2B();
-						PPT2Sync::PPT2MemoryReader::Pieces Rnext = PPT2Sync::PPT2MemoryReader::GetPieces();
-						std::deque<int> Dnext;
+						//PPT2Sync::PPT2MemoryReader::Pieces Rnext = PPT2Sync::PPT2MemoryReader::GetPieces();
 
 						// Ai側Reader;
 						GraySea->ReadCurrent(current.type);
 						GraySea->ReadHold(PPT2Sync::PPT2MemoryReader::GetHold());
+						GraySea->ReadNext(make_d_next(PPT2Sync::PPT2MemoryReader::GetPieces()));
 						GraySea->ReadCB2B(nowCB2B.combo, nowCB2B.b2b);
 						for (int j = 0; j < 10; j++) {
 							for (int i = 0; i < 40; i++) {
 								GraySea->ReadField(i, j, field[j][i]);
 							}
 						}
-
+						
 						// Ai側Thinking;
 
-						GraySea->thinking();
+						GraySea->thinking(); // 思考に時間が掛かる　別スレッドで動かさずに同期
 						std::unique_ptr<PPT2Sync::Command[]> nowOperate;
 						int opr_size = TranscribeCommand(nowOperate, GraySea->getCmdList());
 
