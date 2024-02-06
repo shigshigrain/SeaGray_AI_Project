@@ -1,4 +1,4 @@
-#include "Controller.h"
+ï»¿#include "Controller.h"
 
 Controller::Controller()
 	: m_scpBus(ScpdiCpp::CreateScpBus())
@@ -16,44 +16,44 @@ bool Controller::PlugIn()
 {
 	if (m_controllerNumber != 0)
 	{
-		// Šù‚ÉÚ‘±‚µ‚Ä‚¢‚é
+		// æ—¢ã«æ¥ç¶šã—ã¦ã„ã‚‹
 		return true;
 	}
 
-	// Ú‘±‚ª¬Œ÷‚·‚é‚Ü‚Å’§í‚·‚é
-	// ¸”s‚Í‚à‚¤Šù‚É‚»‚Ì controllerNumber ‚ÍÚ‘±‚³‚ê‚Ä‚¢‚é‚±‚Æ‚ğ•\‚·
-	// ¦’§í‰ñ” 10 ‰ñ‚Ü‚Å
+	// æ¥ç¶šãŒæˆåŠŸã™ã‚‹ã¾ã§æŒ‘æˆ¦ã™ã‚‹
+	// å¤±æ•—ã¯ã‚‚ã†æ—¢ã«ãã® controllerNumber ã¯æ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’è¡¨ã™
+	// â€»æŒ‘æˆ¦å›æ•° 10 å›ã¾ã§
 	for (int i = 1; i <= 10; ++i)
 	{
 		if (m_scpBus->PlugIn(i))
 		{
-			// Ú‘±‚Å‚«‚½
+			// æ¥ç¶šã§ããŸ
 			m_controllerNumber = i;
 			return true;
 		}
 	}
 
-	// Ú‘±‚Å‚«‚È‚©‚Á‚½
+	// æ¥ç¶šã§ããªã‹ã£ãŸ
 	return false;
 }
 bool Controller::Unplug()
 {
 	if (m_controllerNumber == 0)
 	{
-		// Šù‚ÉØ’f‚µ‚Ä‚¢‚é
+		// æ—¢ã«åˆ‡æ–­ã—ã¦ã„ã‚‹
 		return true;
 	}
 
 	if (m_scpBus->Unplug(m_controllerNumber))
 	{
-		// Ø’f‚Å‚«‚½
+		// åˆ‡æ–­ã§ããŸ
 		m_controllerNumber = 0;
 		return true;
 	}
 
-	// Ø’f‚Å‚«‚È‚©‚Á‚½
-	// ƒRƒ“ƒgƒ[ƒ‰‚ÍŠù‚É‘¼‚ÌƒvƒƒZƒX‚ÉØ’f‚³‚ê‚Ä‚¢‚½‚Æ‰¼’è‚µ‚Ä
-	// m_controllerNumber ‚É 0 ‚ğ‘ã“ü‚·‚é
+	// åˆ‡æ–­ã§ããªã‹ã£ãŸ
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã¯æ—¢ã«ä»–ã®ãƒ—ãƒ­ã‚»ã‚¹ã«åˆ‡æ–­ã•ã‚Œã¦ã„ãŸã¨ä»®å®šã—ã¦
+	// m_controllerNumber ã« 0 ã‚’ä»£å…¥ã™ã‚‹
 	m_controllerNumber = 0;
 	return false;
 }
@@ -66,22 +66,22 @@ void Controller::PressButton(ScpdiCpp::X360Buttons x360Buttons)
 {
 	if (x360Buttons == m_prevX360Buttons)
 	{
-		// ‘O‰ñ‚Æ“¯‚¶ƒ{ƒ^ƒ“‚¾‚Á‚½ê‡•Ï‰»‚ª‚È‚¢‚Ì‚Å
-		// –³‘Ê‚Éˆ—‚ğ‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+		// å‰å›ã¨åŒã˜ãƒœã‚¿ãƒ³ã ã£ãŸå ´åˆå¤‰åŒ–ãŒãªã„ã®ã§
+		// ç„¡é§„ã«å‡¦ç†ã‚’ã—ãªã„ã‚ˆã†ã«ã™ã‚‹
 		return;
 	}
 
-	// ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğİ’è
-	// ¦NONE‚Í‘Sƒ{ƒ^ƒ“‚ğ—£‚·‚±‚Æ‚ğ•\‚·
+	// ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’è¨­å®š
+	// â€»NONEã¯å…¨ãƒœã‚¿ãƒ³ã‚’é›¢ã™ã“ã¨ã‚’è¡¨ã™
 	m_x360Controller->SetButtons(x360Buttons);
 	m_scpBus->Report(m_controllerNumber, m_x360Controller);
 
-	// ¡‰ñ‰Ÿ‚µ‚½ƒ{ƒ^ƒ“‚ğŠo‚¦‚Ä‚¨‚­
+	// ä»Šå›æŠ¼ã—ãŸãƒœã‚¿ãƒ³ã‚’è¦šãˆã¦ãŠã
 	m_prevX360Buttons = x360Buttons;
 }
 void Controller::PressButton(PPT2Sync::Button button)
 {
-	// Command ‚ğ X360Buttons ‚É•ÏŠ·
+	// Command ã‚’ X360Buttons ã«å¤‰æ›
 	ScpdiCpp::X360Buttons x360Buttons = ScpdiCpp::X360Buttons::NONE;
 	switch (button)
 	{

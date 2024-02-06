@@ -744,6 +744,9 @@
     <None Include="App\engine\font\min\siv3d-min.woff">
       <Filter>Resource Files\engine\font\min</Filter>
     </None>
+    <None Include="App\ScpDriverInterface.dll" />
+    <None Include="App\PPT2Sync.dll" />
+    <None Include="App\ScpdiCpp.dll" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="App\example\test.mp3">

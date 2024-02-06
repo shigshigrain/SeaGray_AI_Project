@@ -1,6 +1,9 @@
 ﻿
 #include "PPT2bot.hpp"
 
+constexpr PPT2Sync::Command OPERATION[1][3] = {
+	{PPT2Sync::Command::Clockwise, PPT2Sync::Command::Clockwise, PPT2Sync::Command::Hard },
+};
 
 namespace shig {
 
@@ -16,7 +19,7 @@ namespace shig {
 		selectCharacter = 0;
 		//controller;
 		GraySea = std::make_unique<shig::AiShigune>(1);
-		GraySea->load_ttrp();
+		
 	}
 
 	PPT2bot::~PPT2bot()
@@ -57,6 +60,8 @@ namespace shig {
 		playerIndex = 0;
 		unplugAllPrev = false;
 		operationIndex = 0;
+
+		GraySea->load_ttrp();
 
 		PPT2Sync::SetSpeed(botSpeed);
 		PPT2Sync::SetCharacter(selectCharacter);
@@ -148,7 +153,7 @@ namespace shig {
 						int field[10][40];
 						PPT2Sync::PPT2MemoryReader::GetField(field);
 						PPT2Sync::PPT2MemoryReader::Current current = PPT2Sync::PPT2MemoryReader::GetCurrentPiece();
-						PPT2Sync::AdjustCurrent(field, current);
+						
 						PPT2Sync::PPT2MemoryReader::ComboB2B nowCB2B = PPT2Sync::PPT2MemoryReader::GetComboB2B();
 						//PPT2Sync::PPT2MemoryReader::Pieces Rnext = PPT2Sync::PPT2MemoryReader::GetPieces();
 
@@ -164,12 +169,16 @@ namespace shig {
 						}
 						
 						// Ai側Thinking;
-
 						GraySea->thinking(); // 思考に時間が掛かる　別スレッドで動かさずに同期
 						std::unique_ptr<PPT2Sync::Command[]> nowOperate;
 						int opr_size = TranscribeCommand(nowOperate, GraySea->getCmdList());
 
+						PPT2Sync::AdjustCurrent(field, current);
+
 						PPT2Sync::Button b = PPT2Sync::StartOperation(nowOperate.get(), opr_size);
+
+						//PPT2Sync::Button b = PPT2Sync::StartOperation(OPERATION[0], 3);
+
 						++operationIndex;
 						index = operationIndex;
 						/*if (operationIndex >= OPERATION_KIND)
