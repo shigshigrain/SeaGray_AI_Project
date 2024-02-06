@@ -1,14 +1,6 @@
 ﻿
 #include "PPT2bot.hpp"
 
-constexpr int OPERATION_KIND = 3;
-constexpr int OPERATION_LENGTH = 4;
-constexpr PPT2Sync::Command OPERATION[OPERATION_KIND][OPERATION_LENGTH] =
-{
-	{ PPT2Sync::Command::Left, PPT2Sync::Command::Left, PPT2Sync::Command::Left, PPT2Sync::Command::Hard },
-	{ PPT2Sync::Command::Right, PPT2Sync::Command::Right, PPT2Sync::Command::Right, PPT2Sync::Command::Hard },
-	{ PPT2Sync::Command::Clockwise, PPT2Sync::Command::None, PPT2Sync::Command::Clockwise, PPT2Sync::Command::Hard }
-};
 
 namespace shig {
 

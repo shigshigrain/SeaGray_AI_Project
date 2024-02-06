@@ -24,6 +24,6 @@ private:
 
 	Texture bg_tex;
 
-
+	
 
 };
