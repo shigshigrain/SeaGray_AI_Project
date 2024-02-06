@@ -7,6 +7,8 @@ Title::Title(const InitData& init)
 	connect_state = (uint8)0;
 	InputSpeed = (uint8)100;
 
+	commandIndex = 0;
+
 	m_exitB = Rect{ Point(650, 100), 50, 160 };
 	m_exitT = Transition{ 0.6s, 0.3s };
 
@@ -21,7 +23,7 @@ void Title::update()
 
 	m_exitT.update(m_exitB.mouseOver());
 
-	if (SimpleGUI::Button(U"Bot initializing", Vec2{ 120, 60 }, 300)) {
+	if (SimpleGUI::Button(U"Bot initializing", Vec2{ 60, 120 }, 300)) {
 		if (connect_state == 0 || connect_state == 2) {
 			if (graysea.Initialize()) {
 				connect_state = (uint8)1;
@@ -36,13 +38,14 @@ void Title::update()
 		
 	}
 
-	if (SimpleGUI::Button(U"AI starting", Vec2{ 180, 60 }, 300)) {
-		if (connect_state == 1) {
+	if (SimpleGUI::Button(U"AI starting", Vec2{ 60, 180 }, 300)) {
+		if (connect_state == 1 && StartFlag == false) {
 			StartFlag = true;
+			bot = Async(shig::ExecuteRun, std::ref(graysea), std::ref(StartFlag), std::ref(commandIndex));
 		}
 	}
 
-	if (SimpleGUI::Button(U"AI stopping", Vec2{ 240, 60 }, 300)) {
+	if (SimpleGUI::Button(U"AI stopping", Vec2{ 60, 240 }, 300)) {
 		if (connect_state == 1) {
 			StartFlag = false;
 		}
@@ -51,6 +54,8 @@ void Title::update()
 	if (m_exitB.leftClicked())
 	{
 		// 終了
+		StartFlag = false;
+		if (bot.isValid())bot.wait();
 		System::Exit();
 	}
 }
@@ -63,6 +68,8 @@ void Title::draw() const
 	/*FontAsset(U"TitleFont")(U"TetrisEmulator2 -v1.1-")
 		.drawAt(TextStyle::OutlineShadow(0.2, ColorF{ 0.2, 0.6, 0.2 }, Vec2{ 3, 3 }, ColorF{ 0.0, 0.5 }), 80, Vec2{ 600, 60 });*/
 
+	FontAsset(U"Menu")(ConnectStatus.at(connect_state)).draw(20, s3d::Vec2{120, 150}, Palette::Tomato);
+
 	m_exitB.draw(ColorF{ 1.0, 0.5 + m_exitT.value() / 2 }).drawFrame(2);
 
 	FontAsset(U"Menu")(U"EXIT").drawAt(m_exitB.center(), ColorF{ 0.25 });
@@ -71,7 +78,8 @@ void Title::draw() const
 
 Title::~Title()
 {
-
+	StartFlag = false;
+	if (bot.isValid())bot.wait();
 	graysea.Destroy();
 
 }

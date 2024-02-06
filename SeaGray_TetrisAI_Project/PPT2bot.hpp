@@ -43,10 +43,9 @@ namespace shig {
 		bool Stop();
 		bool Stop(std::atomic_bool& abort);
 		void Destroy();
-
-
-
 	};
+
+	bool ExecuteRun(shig::PPT2bot& pb, const std::atomic_bool& abort, std::atomic_int& index);
 
 
 }

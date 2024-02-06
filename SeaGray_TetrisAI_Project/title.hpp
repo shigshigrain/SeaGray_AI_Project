@@ -22,9 +22,12 @@ private:
 	uint8 connect_state;
 	uint8 InputSpeed;
 
-	Rect m_exitB;
-	Transition m_exitT;
+	std::atomic_int commandIndex;
 
+	s3d::AsyncTask<bool> bot;
+	Rect m_exitB;
+
+	Transition m_exitT;
 	Texture bg_tex;
 
 	shig::PPT2bot graysea;

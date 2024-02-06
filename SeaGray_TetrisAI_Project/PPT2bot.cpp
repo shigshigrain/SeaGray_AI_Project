@@ -171,7 +171,7 @@ namespace shig {
 
 						PPT2Sync::Button b = PPT2Sync::StartOperation(nowOperate.get(), opr_size);
 						++operationIndex;
-						
+						index = operationIndex;
 						/*if (operationIndex >= OPERATION_KIND)
 						{
 							operationIndex = 0;
@@ -284,11 +284,12 @@ namespace shig {
 	}
 
 
+	bool ExecuteRun(shig::PPT2bot& pb, const std::atomic_bool& abort, std::atomic_int& index)
+	{
+		pb.Running(abort, index);
 
-
-
-
-
+		return true;
+	}
 
 }
 
