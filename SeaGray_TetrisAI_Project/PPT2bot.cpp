@@ -158,7 +158,9 @@ namespace shig {
 						PPT2Sync::PPT2MemoryReader::Current current = PPT2Sync::PPT2MemoryReader::GetCurrentPiece();
 						PPT2Sync::AdjustCurrent(field, current);
 						PPT2Sync::PPT2MemoryReader::ComboB2B nowCB2B = PPT2Sync::PPT2MemoryReader::GetComboB2B();
-						
+						PPT2Sync::PPT2MemoryReader::Pieces Rnext = PPT2Sync::PPT2MemoryReader::GetPieces();
+						std::deque<int> Dnext;
+
 						// Ai側Reader;
 						GraySea->ReadCurrent(current.type);
 						GraySea->ReadHold(PPT2Sync::PPT2MemoryReader::GetHold());
@@ -262,6 +264,12 @@ namespace shig {
 			}
 		}
 		return (int)cmd_size;
+	}
+
+	std::deque<int> PPT2bot::make_d_next(const PPT2Sync::PPT2MemoryReader::Pieces& _rnext)
+	{
+		std::deque<int> _dnext = { _rnext.p1, _rnext.p2 , _rnext.p3 , _rnext.p4 , _rnext.p5 };
+		return _dnext;
 	}
 
 	bool PPT2bot::Stop()
