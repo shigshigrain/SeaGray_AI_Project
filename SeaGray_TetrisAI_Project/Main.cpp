@@ -1,5 +1,5 @@
 ﻿
-# include <Siv3D.hpp> // Siv3D v0.6.13
+//# include <Siv3D.hpp> // Siv3D v0.6.13
 
 //# include "common.hpp"
 # include "title.hpp"
@@ -10,7 +10,7 @@ void Main()
 	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 
 	// タイトル変更
-	Window::SetTitle(U"SeaGray ~TetrisAI~ -v0.1-");
+	Window::SetTitle(U"SeaGray <TetrisAI> -v0.1-");
 
 	// サイズ変更
 
@@ -77,7 +77,7 @@ void Main()
 		}
 
 		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor
-		Circle{ Cursor::PosF(), 5 }.draw(ColorF{ 1, 1, 1, 0.8 });
+		//Circle{ Cursor::PosF(), 5 }.draw(ColorF{ 1, 1, 1, 0.8 });
 
 
 	}

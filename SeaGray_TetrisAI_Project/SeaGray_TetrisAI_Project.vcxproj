@@ -50,7 +50,7 @@
     <TargetName>$(ProjectName)(debug)</TargetName>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
     <IncludePath>$(SIV3D_0_6_13)\include;$(SIV3D_0_6_13)\include\ThirdParty;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SIV3D_0_6_13)\lib\Windows;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Release;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Lib\Release;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SIV3D_0_6_13)\lib\Windows;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Debug;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Lib\Debug;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -76,12 +76,13 @@
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <BuildStlModules>false</BuildStlModules>
       <AdditionalIncludeDirectories>C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\AiShigune_StaticLib_DPCPP\U_utility;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\AiShigune_StaticLib_DPCPP\U_TetriCore;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\AiShigune_StaticLib_DPCPP\U_AI_Shigune;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>advapi32.dll;crypt32.dll;dwmapi.dll;gdi32.dll;imm32.dll;ole32.dll;oleaut32.dll;opengl32.dll;shell32.dll;shlwapi.dll;user32.dll;winmm.dll;ws2_32.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <AdditionalDependencies>C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Release\AiShigune_StaticLib_DPCPP.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\ScpdiCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Debug\AiShigune_StaticLib_DPCPP.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug\PPT2Sync.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug\ScpdiCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
@@ -112,7 +113,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>advapi32.dll;crypt32.dll;dwmapi.dll;gdi32.dll;imm32.dll;ole32.dll;oleaut32.dll;opengl32.dll;shell32.dll;shlwapi.dll;user32.dll;winmm.dll;ws2_32.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <AdditionalDependencies>C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Release\AiShigune_StaticLib_DPCPP.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\ScpdiCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Release\AiShigune_StaticLib_DPCPP.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\PPT2Sync.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\ScpdiCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
@@ -153,6 +154,7 @@
     <Image Include="App\example\texture\wood.jpg" />
     <Image Include="App\example\windmill.png" />
     <Image Include="App\icon.ico" />
+    <Image Include="App\tex\background\tetris_emulator_background03.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="App\Resource.rc" />

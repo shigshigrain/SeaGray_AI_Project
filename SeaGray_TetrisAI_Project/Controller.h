@@ -1,6 +1,5 @@
-// ‚PƒCƒ“ƒXƒ^ƒ“ƒX‚É‚Â‚«‰¼‘zƒRƒ“ƒgƒ[ƒ‰‚P‚Â•ª‚ð•\‚·ƒNƒ‰ƒX
+ï»¿// ï¼‘ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«ã¤ãä»®æƒ³ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ï¼‘ã¤åˆ†ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 //
-
 #pragma once
 
 #include "PPT2Sync.h"
