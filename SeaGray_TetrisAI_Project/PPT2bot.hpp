@@ -40,6 +40,7 @@ namespace shig {
 		bool Running(const std::atomic_bool& abort, std::atomic_int& index);
 		int TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int>& cmdl);
 		std::deque<int> make_d_next(const PPT2Sync::PPT2MemoryReader::Pieces& _rnext);
+		std::vector<int> AdjustCommand(const std::vector<int>& cmd);
 		bool Stop();
 		bool Stop(std::atomic_bool& abort);
 		void Destroy();

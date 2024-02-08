@@ -82,7 +82,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>advapi32.dll;crypt32.dll;dwmapi.dll;gdi32.dll;imm32.dll;ole32.dll;oleaut32.dll;opengl32.dll;shell32.dll;shlwapi.dll;user32.dll;winmm.dll;ws2_32.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <AdditionalDependencies>C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug\ScpdiCpp.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug\PPT2Sync.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Debug\AiShigune_StaticLib_DPCPP.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug\ScpdiCpp.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Debug\PPT2Sync.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Debug\AiShigune_StaticLib_DPCPP.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libirc.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
@@ -106,6 +106,9 @@
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <BuildStlModules>false</BuildStlModules>
       <AdditionalIncludeDirectories>C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\AiShigune_StaticLib_DPCPP\U_utility;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\AiShigune_StaticLib_DPCPP\U_TetriCore;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\AiShigune_StaticLib_DPCPP\U_AI_Shigune;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableModules>false</EnableModules>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -113,7 +116,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>advapi32.dll;crypt32.dll;dwmapi.dll;gdi32.dll;imm32.dll;ole32.dll;oleaut32.dll;opengl32.dll;shell32.dll;shlwapi.dll;user32.dll;winmm.dll;ws2_32.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <AdditionalDependencies>C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\ScpdiCpp.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\PPT2Sync.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Release\AiShigune_StaticLib_DPCPP.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\ScpdiCpp.lib;C:\Users\Soya Kawasaki\source\repos\PPT2Sync\Project1\x64\Release\PPT2Sync.lib;C:\Users\Soya Kawasaki\source\repos\AiShigune_StaticLib_DPCPP\x64\Release\AiShigune_StaticLib_DPCPP.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libirc.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libircmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\svml_dispmt.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libdecimal.lib;C:\Program Files (x86)\Intel\oneAPI\compiler\2024.0\lib\libmmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>

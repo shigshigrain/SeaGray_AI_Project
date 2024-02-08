@@ -1,8 +1,8 @@
 ﻿
 #include "PPT2bot.hpp"
 
-constexpr PPT2Sync::Command OPERATION[1][3] = {
-	{PPT2Sync::Command::Clockwise, PPT2Sync::Command::Clockwise, PPT2Sync::Command::Hard },
+constexpr PPT2Sync::Command OPERATION[1][6] = {
+	{PPT2Sync::Command::SoftEdge, PPT2Sync::Command::LeftEdge, PPT2Sync::Command::RightEdge, PPT2Sync::Command::LeftEdge, PPT2Sync::Command::RightEdge, PPT2Sync::Command::Hard },
 };
 
 namespace shig {
@@ -57,7 +57,7 @@ namespace shig {
 
 		takingOverStart = true;
 		framePrev = -1;
-		playerIndex = 0;
+		playerIndex = -1;
 		unplugAllPrev = false;
 		operationIndex = 0;
 
@@ -79,6 +79,8 @@ namespace shig {
 	{
 
 		//if (!abort)return false; // trueの状態でループに入ることを想定
+
+		//std::unique_ptr<std::ofstream> fieldDump = std::make_unique<std::ofstream>("dumpField.csv");
 
 		while (abort)
 		{
@@ -129,12 +131,12 @@ namespace shig {
 				takingOverStart = true;
 			}
 
-			if (PPT2Sync::PPT2MemoryReader::IsOnline())
-			{
-				// 配布版はオンラインでは動かさない<<厳守>>
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
-				continue;
-			}
+			//if (PPT2Sync::PPT2MemoryReader::IsOnline())
+			//{
+			//	// 配布版はオンラインでは動かさない
+			//	std::this_thread::sleep_for(std::chrono::milliseconds(30));
+			//	continue;
+			//}
 
 			if (PPT2Sync::PPT2MemoryReader::IsMatch())
 			{
@@ -153,7 +155,7 @@ namespace shig {
 						int field[10][40];
 						PPT2Sync::PPT2MemoryReader::GetField(field);
 						PPT2Sync::PPT2MemoryReader::Current current = PPT2Sync::PPT2MemoryReader::GetCurrentPiece();
-						
+						PPT2Sync::AdjustCurrent(field, current);
 						PPT2Sync::PPT2MemoryReader::ComboB2B nowCB2B = PPT2Sync::PPT2MemoryReader::GetComboB2B();
 						//PPT2Sync::PPT2MemoryReader::Pieces Rnext = PPT2Sync::PPT2MemoryReader::GetPieces();
 
@@ -167,17 +169,29 @@ namespace shig {
 								GraySea->ReadField(i, j, field[j][i]);
 							}
 						}
+
+						// field Dump
+						/**fieldDump << "-----< index = " << operationIndex << " >-----" << "\n";
+						for (int i = 0; i < 40; i++) {
+							for (int j = 0; j < 10; j++) {
+								*fieldDump << field[j][i] << ",";
+							}
+							*fieldDump << "\n";
+						}*/
+
 						
 						// Ai側Thinking;
 						GraySea->thinking(); // 思考に時間が掛かる　別スレッドで動かさずに同期
-						std::unique_ptr<PPT2Sync::Command[]> nowOperate;
-						int opr_size = TranscribeCommand(nowOperate, GraySea->getCmdList());
 
-						PPT2Sync::AdjustCurrent(field, current);
+						/*std::thread thk(GraySea->thinking(), this);
+						thk.join()*/;
+
+						std::unique_ptr<PPT2Sync::Command[]> nowOperate;
+						int opr_size = TranscribeCommand(nowOperate, AdjustCommand(GraySea->getCmdList()));
 
 						PPT2Sync::Button b = PPT2Sync::StartOperation(nowOperate.get(), opr_size);
 
-						//PPT2Sync::Button b = PPT2Sync::StartOperation(OPERATION[0], 3);
+						//PPT2Sync::Button b = PPT2Sync::StartOperation(OPERATION[0], 6);
 
 						++operationIndex;
 						index = operationIndex;
@@ -214,7 +228,7 @@ namespace shig {
 				}
 
 				// しっかり同期するためにはCPUの休憩時間は1～3msがお勧め
-				Sleep(3);
+				Sleep(1);
 			}
 			else
 			{
@@ -271,6 +285,21 @@ namespace shig {
 	{
 		std::deque<int> _dnext = { _rnext.p1, _rnext.p2 , _rnext.p3 , _rnext.p4 , _rnext.p5 };
 		return _dnext;
+	}
+
+	std::vector<int> PPT2bot::AdjustCommand(const std::vector<int>& cmd)
+	{
+		std::vector<int> adcmd = { 0 };
+
+		for (auto&& _c : cmd) {
+			/*if (_c == 4 || _c == 5) {
+				adcmd.push_back(0);
+			}*/
+			adcmd.push_back(0);
+			adcmd.push_back(_c);
+		}
+
+		return adcmd;
 	}
 
 	bool PPT2bot::Stop()
