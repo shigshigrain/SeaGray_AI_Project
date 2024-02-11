@@ -5,6 +5,8 @@ constexpr PPT2Sync::Command OPERATION[1][6] = {
 	{PPT2Sync::Command::SoftEdge, PPT2Sync::Command::LeftEdge, PPT2Sync::Command::RightEdge, PPT2Sync::Command::LeftEdge, PPT2Sync::Command::RightEdge, PPT2Sync::Command::Hard },
 };
 
+constexpr PPT2Sync::Command skip_opr[1] = {	PPT2Sync::Command::None };
+
 namespace shig {
 
 	PPT2bot::PPT2bot()
@@ -16,7 +18,7 @@ namespace shig {
 		playerIndex = -1;
 		operationIndex = -1;
 		botSpeed = 100;
-		selectCharacter = 0;
+		selectCharacter = 10;
 		//controller;
 		GraySea = std::make_unique<shig::AiShigune>(1);
 		
@@ -159,6 +161,16 @@ namespace shig {
 						PPT2Sync::PPT2MemoryReader::ComboB2B nowCB2B = PPT2Sync::PPT2MemoryReader::GetComboB2B();
 						//PPT2Sync::PPT2MemoryReader::Pieces Rnext = PPT2Sync::PPT2MemoryReader::GetPieces();
 
+						if (current.type == -1) {
+							PPT2Sync::Button b = PPT2Sync::StartOperation(skip_opr, 1);
+
+							++operationIndex;
+							index = operationIndex;
+					
+							controller.PressButton(b);
+							break;
+						}
+
 						// Ai側Reader;
 						GraySea->ReadCurrent(current.type);
 						GraySea->ReadHold(PPT2Sync::PPT2MemoryReader::GetHold());
@@ -228,7 +240,7 @@ namespace shig {
 				}
 
 				// しっかり同期するためにはCPUの休憩時間は1～3msがお勧め
-				Sleep(1);
+				Sleep(3);
 			}
 			else
 			{
@@ -290,13 +302,23 @@ namespace shig {
 	std::vector<int> PPT2bot::AdjustCommand(const std::vector<int>& cmd)
 	{
 		std::vector<int> adcmd = { 0 };
-
+		int prev_cmd = 0;
 		for (auto&& _c : cmd) {
-			/*if (_c == 4 || _c == 5) {
+			/*if ((_c == 6 || _c == 7) && (prev_cmd == 4 || prev_cmd == 5)) {
 				adcmd.push_back(0);
 			}*/
-			adcmd.push_back(0);
-			adcmd.push_back(_c);
+			if (_c == 6 || _c == 7) {
+				adcmd.push_back(0);
+				adcmd.push_back(_c);
+			}
+			else if (_c == 1) {
+				adcmd.push_back(0);
+				adcmd.push_back(_c);
+				//adcmd.push_back(0);
+			}
+			else {
+				adcmd.push_back(_c);
+			}
 		}
 
 		return adcmd;
