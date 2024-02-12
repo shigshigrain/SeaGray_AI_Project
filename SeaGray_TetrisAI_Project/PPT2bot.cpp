@@ -240,7 +240,7 @@ namespace shig {
 				}
 
 				// しっかり同期するためにはCPUの休憩時間は1～3msがお勧め
-				Sleep(3);
+				Sleep(2);
 			}
 			else
 			{
@@ -312,7 +312,7 @@ namespace shig {
 				adcmd.push_back(_c);
 			}
 			else if (_c == 1) {
-				adcmd.push_back(0);
+				//adcmd.push_back(0);
 				adcmd.push_back(_c);
 				//adcmd.push_back(0);
 			}
