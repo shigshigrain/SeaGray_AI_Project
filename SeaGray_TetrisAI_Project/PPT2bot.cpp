@@ -311,6 +311,10 @@ namespace shig {
 				adcmd.push_back(0);
 				adcmd.push_back(_c);
 			}
+			else if (prev_cmd == 5 && _c == 5) {
+				adcmd.push_back(0);
+				adcmd.push_back(_c);
+			}
 			else if (_c == 1) {
 				//adcmd.push_back(0);
 				adcmd.push_back(_c);
@@ -319,6 +323,9 @@ namespace shig {
 			else {
 				adcmd.push_back(_c);
 			}
+
+			prev_cmd = _c;
+
 		}
 
 		return adcmd;

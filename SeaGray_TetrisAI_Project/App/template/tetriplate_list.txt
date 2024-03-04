@@ -1,4 +1,12 @@
 52
+HachimitsuS_3PC-O_01.ttrp
+HachimitsuS_3PC-O_02.ttrp
+HachimitsuS_3PC-O_03.ttrp
+HachimitsuS_3PC-O_04.ttrp
+HachimitsuS_3PC-O_05.ttrp
+HachimitsuS_3PC-O_06.ttrp
+HachimitsuS_3PC-O_07.ttrp
+HachimitsuS_3PC-O_08.ttrp
 HachimitsuS_1-0.ttrp
 HachimitsuS_1-1.ttrp
 HachimitsuS_1-2.ttrp
@@ -23,14 +31,6 @@ HachimitsuZ_2-5_T.ttrp
 HachimitsuZ_2-6_T.ttrp
 HachimitsuZ_2-7_T.ttrp
 HachimitsuZ_2-8_T.ttrp
-HachimitsuS_3PC-O_01.ttrp
-HachimitsuS_3PC-O_02.ttrp
-HachimitsuS_3PC-O_03.ttrp
-HachimitsuS_3PC-O_04.ttrp
-HachimitsuS_3PC-O_05.ttrp
-HachimitsuS_3PC-O_06.ttrp
-HachimitsuS_3PC-O_07.ttrp
-HachimitsuS_3PC-O_08.ttrp
 hotcakeZ_1-1.ttrp
 hotcakeZ_2-1.ttrp
 hotcakeZ_2-2.ttrp
