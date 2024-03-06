@@ -301,24 +301,23 @@ namespace shig {
 
 	std::vector<int> PPT2bot::AdjustCommand(const std::vector<int>& cmd)
 	{
-		std::vector<int> adcmd = { 0 };
+		std::vector<int> adcmd = {};
 		int prev_cmd = 0;
 		for (auto&& _c : cmd) {
 			/*if ((_c == 6 || _c == 7) && (prev_cmd == 4 || prev_cmd == 5)) {
 				adcmd.push_back(0);
 			}*/
-			if (_c == 6 || _c == 7) {
+			if (prev_cmd == 6 || _c == 6) {
+				adcmd.push_back(0);
+				adcmd.push_back(_c);
+			}
+			else if (prev_cmd == 7 || _c == 7) {
 				adcmd.push_back(0);
 				adcmd.push_back(_c);
 			}
 			else if (prev_cmd == 5 && _c == 5) {
-				adcmd.push_back(0);
-				adcmd.push_back(_c);
-			}
-			else if (_c == 1) {
 				//adcmd.push_back(0);
 				adcmd.push_back(_c);
-				//adcmd.push_back(0);
 			}
 			else {
 				adcmd.push_back(_c);
