@@ -19,6 +19,7 @@ namespace shig {
 		operationIndex = -1;
 		botSpeed = 100;
 		selectCharacter = 10;
+		// Thinker は初期化しない
 		//controller;
 		GraySea = std::make_unique<shig::AiShigune>(1);
 		
@@ -26,6 +27,12 @@ namespace shig {
 
 	PPT2bot::~PPT2bot()
 	{
+
+		if (Thinker.joinable()) {
+			threadRunning = false;
+			Thinker.join();
+		}
+
 	}
 
 	bool PPT2bot::SetPlayerIndex(int pi)
@@ -63,7 +70,7 @@ namespace shig {
 		unplugAllPrev = false;
 		operationIndex = 0;
 
-		GraySea->load_ttrp();
+		GraySea->loadTTRP();
 
 		PPT2Sync::SetSpeed(botSpeed);
 		PPT2Sync::SetCharacter(selectCharacter);
@@ -164,7 +171,7 @@ namespace shig {
 						if (current.type == -1) {
 							PPT2Sync::Button b = PPT2Sync::StartOperation(skip_opr, 1);
 
-							++operationIndex;
+							//++operationIndex;
 							index = operationIndex;
 					
 							controller.PressButton(b);
@@ -203,7 +210,7 @@ namespace shig {
 
 						PPT2Sync::Button b = PPT2Sync::StartOperation(nowOperate.get(), opr_size);
 
-						//PPT2Sync::Button b = PPT2Sync::StartOperation(OPERATION[0], 6);
+
 
 						++operationIndex;
 						index = operationIndex;
@@ -253,6 +260,11 @@ namespace shig {
 		}
 
 		return true;
+	}
+
+	bool PPT2bot::Read2Ai()
+	{
+		return false;
 	}
 
 	int PPT2bot::TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int>& cmdl)

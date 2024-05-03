@@ -11,7 +11,7 @@ namespace shig {
 	class PPT2bot
 	{
 	private:
-		bool threadRunning; // = false;
+		atomic_bool threadRunning; // std::thread Thinkerの制御用;
 		bool takingOverStart;
 		bool unplugAllPrev;
 		int framePrev;
@@ -19,6 +19,7 @@ namespace shig {
 		int operationIndex;
 		int botSpeed;
 		int selectCharacter;
+		std::thread Thinker;
 		Controller controller;
 		std::unique_ptr<shig::AiShigune> GraySea;
 
@@ -38,6 +39,7 @@ namespace shig {
 		bool Initialize();
 		bool Running();
 		bool Running(const std::atomic_bool& abort, std::atomic_int& index);
+		bool Read2Ai();
 		int TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int>& cmdl);
 		std::deque<int> make_d_next(const PPT2Sync::PPT2MemoryReader::Pieces& _rnext);
 		std::vector<int> AdjustCommand(const std::vector<int>& cmd);
