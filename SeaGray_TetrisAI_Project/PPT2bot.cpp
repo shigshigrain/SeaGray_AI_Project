@@ -267,7 +267,7 @@ namespace shig {
 		return false;
 	}
 
-	int PPT2bot::TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int>& cmdl)
+	int PPT2bot::TranscribeCommand(std::unique_ptr<PPT2Sync::Command[]>& opr, const std::vector<int8_t>& cmdl)
 	{
 		const size_t cmd_size = cmdl.size();
 		opr = make_unique<PPT2Sync::Command[]>(cmd_size);
@@ -276,6 +276,9 @@ namespace shig {
 
 			switch (cmdl.at(i))
 			{
+			case 0:
+				opr[i] = PPT2Sync::Command::None;
+				break;
 			case 1:
 				opr[i] = PPT2Sync::Command::Hold;
 				break;
@@ -311,19 +314,19 @@ namespace shig {
 		return _dnext;
 	}
 
-	std::vector<int> PPT2bot::AdjustCommand(const std::vector<int>& cmd)
+	std::vector<int8_t> PPT2bot::AdjustCommand(const std::vector<int8_t>& cmd)
 	{
-		std::vector<int> adcmd = {};
+		std::vector<int8_t> adcmd = {};
 		int prev_cmd = 0;
 		for (auto&& _c : cmd) {
 			/*if ((_c == 6 || _c == 7) && (prev_cmd == 4 || prev_cmd == 5)) {
 				adcmd.push_back(0);
 			}*/
-			if (prev_cmd == 6 || _c == 6) {
+			if (prev_cmd == 6 && _c == 6) {
 				adcmd.push_back(0);
 				adcmd.push_back(_c);
 			}
-			else if (prev_cmd == 7 || _c == 7) {
+			else if (prev_cmd == 7 && _c == 7) {
 				adcmd.push_back(0);
 				adcmd.push_back(_c);
 			}
